@@ -59,7 +59,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ROO-Vd-s4V">
-                        <barButtonItem key="leftBarButtonItem" title="Profile" id="nBT-4M-h1O"/>
+                        <barButtonItem key="leftBarButtonItem" title="Map" id="nBT-4M-h1O">
+                            <connections>
+                                <action selector="MapViewButtonTapped:" destination="BYZ-38-t0r" id="cGV-5d-81B"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="lRq-xt-f7K">
                             <connections>
                                 <action selector="snapBarButtonItemTapped:" destination="BYZ-38-t0r" id="hY3-ie-s6U"/>
@@ -68,11 +72,38 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="36W-qy-cCv" id="fYW-Ac-VGO"/>
+                        <segue destination="jSj-U7-mJU" kind="show" identifier="mapSegue" id="LHB-Kx-7M6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1117" y="387"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="1b6-OJ-LcY">
+            <objects>
+                <viewController id="jSj-U7-mJU" customClass="MapViewController" customModule="exchangeAGram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z29-uF-FyL"/>
+                        <viewControllerLayoutGuide type="bottom" id="CFn-E6-e1h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2s8-ts-1ED">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Z8g-UZ-rPK">
+                                <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="Z8g-UZ-rPK" id="UZi-Dx-Bgx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NnR-G7-7ZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1854" y="387"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cMh-WD-iqT">

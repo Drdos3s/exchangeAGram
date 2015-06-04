@@ -38,6 +38,8 @@
 	</array>
 	<key>FacebookAppID</key>
 	<string>750118748443055</string>
+	<key>NSLocationUsageDescription</key>
+	<string>ExchangeAGram Would like to use your location</string>
 	<key>FacebookDisplayName</key>
 	<string>ExchangeTest</string>
 	<key>CFBundleURLTypes</key>
@@ -51,6 +53,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSLocationWhenInUsageDescription</key>
+	<string>ExchangeAGram Would like to use your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>ExchangeAGram Would like to use your location</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

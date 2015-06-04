@@ -9,20 +9,30 @@
 import UIKit
 import MobileCoreServices //import in build phase in main project (Importing framework)
 import CoreData //use of core data
+import MapKit
 
-class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
 
     var feedArray:[AnyObject] = [] //Creating array to hold the feed items
     
+    
+    var locationManager: CLLocationManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //setting up location stuff
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest //most precise location possible
+        locationManager.requestAlwaysAuthorization() //request permission to use location services
         
-
+        
+        locationManager.distanceFilter = 100.0
+        locationManager.startUpdatingLocation()
         
     }
     
@@ -39,6 +49,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func MapViewButtonTapped(sender: UIBarButtonItem) { //moves to map VC
+        performSegueWithIdentifier("mapSegue", sender: nil)
+    
     }
     
     //Camera button
@@ -126,6 +141,8 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         feedItem.image = imageData
         feedItem.caption = "Text Caption"
         feedItem.thumbnail = thumbNailData //setting thumbnail image to the representation of the actual
+        feedItem.latitude = locationManager.location.coordinate.latitude
+        feedItem.longitude = locationManager.location.coordinate.longitude
         
         (UIApplication.sharedApplication().delegate as! AppDelegate).saveContext()
         
@@ -143,6 +160,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         self.navigationController?.pushViewController(filterVC, animated: false) //presents filter VC on screen
         
+    }
+    
+    //CLLocation Manager delegate
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        println("Locations = \(locations)")
     }
     
 
